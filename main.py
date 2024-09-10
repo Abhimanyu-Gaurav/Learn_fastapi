@@ -4,8 +4,8 @@ from typing import Optional
 app = FastAPI()
 
 
-# @app.get("/")
-# def index():
+# @app.get("/")    # Here,("/") is path, .get is operation, @app is decorator. on whole it is called path     operation decorator. In operation we can also use Post, Put and Delete method. 
+# def index():     # path operation function.
 #     return {"Hello! World"}
 
 
@@ -33,13 +33,15 @@ def unpublished():
     return {"data" : "all unpublished blogs"}
 
 
-@app.get("/blog/{id}") # when we need dynamic routing then we put {id} in it.
+@app.get("/blog/{id}") # when we need dynamic routing then we put {id} in it. Mainly use Curly bracket.
 def show(id : int):
     # fetch blog with id = id
     return {"data" : id}
+
 
 
 @app.get("/blog/{id}/comments")
     # fetch comments of blog with id = id
 def comments(id):
     return {"data" : {'1','2'}}
+
