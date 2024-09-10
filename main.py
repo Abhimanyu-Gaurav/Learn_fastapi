@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from typing import Optional 
+from pydantic import BaseModel
+
 
 app = FastAPI()
 
-
+      ## GEt method
 # @app.get("/")    # Here,("/") is path, .get is operation, @app is decorator. on whole it is called path     operation decorator. In operation we can also use Post, Put and Delete method. 
 # def index():     # path operation function.
 #     return {"Hello! World"}
@@ -42,6 +44,18 @@ def show(id : int):
 
 @app.get("/blog/{id}/comments")
     # fetch comments of blog with id = id
-def comments(id):
+def comments(id, limit=10):
     return {"data" : {'1','2'}}
 
+
+        ## POST method
+
+class Blog(BaseModel):
+    title : str
+    body : str
+    published : Optional[bool] 
+
+
+@app.post("/blog")
+def create_blog(blog: Blog):
+    return {"data" : f"Blog is created with tittle as {blog.title} "}
