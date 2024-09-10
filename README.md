@@ -1,1 +1,1 @@
-# This is my Local Repo ragrding FastAPI
+# This is my Local Repo regarding FastAPI
