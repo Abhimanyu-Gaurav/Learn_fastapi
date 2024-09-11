@@ -4,22 +4,22 @@ from pydantic import BaseModel
 # import uvicorn
 
 
-app = FastAPI()   # instance
+app = FastAPI()   
 
       ## GEt method
-# @app.get("/")    # Here,("/") is path, .get is operation, @app is decorator. on whole it is called path     operation decorator. In operation we can also use Post, Put and Delete method. 
-# def index():     # path operation function.
-#     return {"Hello! World"}
+@app.get("/")    # Here,("/") is path, .get is operation, @app is decorator. on whole it is called path     operation decorator. In operation we can also use Post, Put and Delete method. 
+def index():     # path operation function.
+    return {"Hello! World"}
 
 
-# @app.get("/about")
-# def about():
-#     return {"data" : "Welcome to FastAPI"}
+@app.get("/about")
+def about():
+    return {"data" : "Welcome to FastAPI"}
 
 
-# @app.get("/")
-# def blogs():
-#     return {"data" : "blog list"}
+@app.get("/")
+def blogs():
+    return {"data" : "blog list"}
 
 @app.get("/blog")
 def index(limit=10, published: bool = True, sort: Optional[str]= None):
