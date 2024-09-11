@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from typing import Optional 
 from pydantic import BaseModel
+# import uvicorn
 
 
-app = FastAPI()
+app = FastAPI()   # instance
 
       ## GEt method
 # @app.get("/")    # Here,("/") is path, .get is operation, @app is decorator. on whole it is called path     operation decorator. In operation we can also use Post, Put and Delete method. 
@@ -59,3 +60,9 @@ class Blog(BaseModel):
 @app.post("/blog")
 def create_blog(blog: Blog):
     return {"data" : f"Blog is created with tittle as {blog.title} "}
+
+
+
+#   ## To run server on different port
+# if __name__ == "__main__" :
+#     uvicorn.run(app, host= "127.0.0.1", port = 9000) 
