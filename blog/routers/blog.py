@@ -5,17 +5,18 @@ from sqlalchemy.orm import Session
 
 
 router = APIRouter(
+    prefix= "/blog",
     tags= ['Blogs']
 )
 get_db = database.get_db
 
 
-@router.get('/blog', response_model=List[schemas.showBlog])
+@router.get('/', response_model=List[schemas.showBlog])
 def all(db: Session = Depends(get_db)):
     blogs = db.query(models.Blog).all()
     return blogs 
 
-@router.post('/blog',status_code=status.HTTP_201_CREATED)     # Here status code of response is changed to 201 instead of 200, Because documented code for creation is 201.
+@router.post('/',status_code=status.HTTP_201_CREATED)     # Here status code of response is changed to 201 instead of 200, Because documented code for creation is 201.
 def create(request: schemas.Blog, db: Session = Depends(get_db)):
     new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
     db.add(new_blog)
@@ -23,7 +24,7 @@ def create(request: schemas.Blog, db: Session = Depends(get_db)):
     db.refresh(new_blog)
     return new_blog
 
-@router.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(' /{id}', status_code=status.HTTP_204_NO_CONTENT)
 def destroy(id, db: Session = Depends(get_db)):
     blog= db.query(models.Blog).filter(models.Blog.id==id)
 
@@ -35,7 +36,7 @@ def destroy(id, db: Session = Depends(get_db)):
     return "Done"
 
 
-@router.put('/blog/{id}',status_code=status.HTTP_202_ACCEPTED)
+@router.put('/{id}',status_code=status.HTTP_202_ACCEPTED)
 def update(id, request: schemas.Blog,  db: Session = Depends(get_db) ):
     blog = db.query(models.Blog).filter(models.Blog.id==id)
     if not blog.first():
@@ -44,7 +45,7 @@ def update(id, request: schemas.Blog,  db: Session = Depends(get_db) ):
     db.commit()
     return 'updated'
 
-@router.get('/blog/{id}', status_code=200, response_model=schemas.showBlog)
+@router.get('/{id}', status_code=200, response_model=schemas.showBlog)
 def show(id, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id ==id).first()
     if not blog:

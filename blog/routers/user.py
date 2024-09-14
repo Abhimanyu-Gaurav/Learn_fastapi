@@ -7,13 +7,14 @@ from ..hashing import Hash
  
 
 router = APIRouter(
+    prefix= "/user",
     tags= ['Users']
 )
 get_db = database.get_db
 
 
 
-@router.post('/user', response_model=schemas.showuser)
+@router.post('/', response_model=schemas.showuser)
 def create_user(request: schemas.user, db: Session = Depends(get_db)):
   
     new_user = models.User(name=request.name, email=request.email, password=Hash.bcrypt(request.password))
@@ -23,7 +24,7 @@ def create_user(request: schemas.user, db: Session = Depends(get_db)):
     return new_user 
 
 
-@router.get('/user/{id}', response_model=schemas.showuser)
+@router.get('/{id}', response_model=schemas.showuser)
 def get_user(id:int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
