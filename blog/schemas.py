@@ -8,4 +8,9 @@ class showBlog(BaseModel):
      title : str
      body : str
 
+class user(BaseModel):
+     name : str
+     email : str
+     password : str 
+
     
