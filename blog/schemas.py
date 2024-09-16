@@ -12,7 +12,7 @@ class user(BaseModel):
      name : str
      email : str
      password : str 
-
+ 
 class showuser(BaseModel):
      name : str
      email : str
@@ -36,6 +36,6 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    email: str | None = None
 
     
